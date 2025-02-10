@@ -1,0 +1,162 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:AvaloniaApplication1.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="https://github.com/wieslawsoltes/Avalonia.Xaml.Behaviors"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaApplication1.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Width="1920" Height="1080"
+        MinWidth="1420" MinHeight="720"
+        Title="AvaloniaApplication1">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
+
+    <Grid ColumnDefinitions="Auto,*">
+        <Grid Background="{DynamicResource 'Dark Charcoal'}" Grid.Column="0" RowDefinitions="Auto,Auto">
+            <!-- Logo -->
+            <Border Grid.Row="0" CornerRadius="100"
+                    Background="{DynamicResource 'Charcoal Gray'}"
+                    HorizontalAlignment="Center"
+                    Padding="15,5,15,5"
+                    Margin="0,10,0,0">
+
+                <TextBlock Text="SHOP DB" Foreground="white" FontFamily="Inria Sans Bold" FontSize="48"></TextBlock>
+            </Border>
+            <!-- Filter -->
+            <Border Margin="0,50" Grid.Row="1" MaxWidth="240">
+                <!-- Filters -->
+                <StackPanel HorizontalAlignment="Center">
+                    <!-- Brand -->
+                    <Button Content="Brand" Classes="filter">
+                        <Button.Flyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <CheckBox Content="Option 1"
+                                              Command="{Binding UpdateFilterTextCommand}" CommandParameter="Option 1"/>
+                                    <CheckBox Content="Option 2"
+                                              Command="{Binding UpdateFilterTextCommand}" CommandParameter="Option 2"/>
+                                    <CheckBox Content="Option 3"
+                                              Command="{Binding UpdateFilterTextCommand}" CommandParameter="Option 3"/>
+                                    <CheckBox Content="Option 4"
+                                              Command="{Binding UpdateFilterTextCommand}" CommandParameter="Option 4"/>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+
+                    <!-- Price -->
+                    <Button Content="Price" Classes="filter">
+                        <Button.Flyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,Auto">
+                                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Low</TextBlock>
+                                        <TextBox
+                                            Margin="5,0"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            Text="{Binding Low, UpdateSourceTrigger=LostFocus}">
+                                        </TextBox>
+                                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">High</TextBlock>
+                                        <TextBox
+                                            Margin="5,0"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Text="{Binding High, UpdateSourceTrigger=LostFocus}">
+                                        </TextBox>
+                                    </Grid>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                    <!-- Width -->
+                    <Button Content="Width" Classes="filter">
+                        <Button.Flyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <CheckBox Content="53 cm" Command="{Binding UpdateFilterTextCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter= "53 cm"/>
+                                    <CheckBox Content="70 cm" Command="{Binding UpdateFilterTextCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="70 cm"/>
+                                    <CheckBox Content="106 cm" Command="{Binding UpdateFilterTextCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="106 cm"/>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+
+                    <Button Content="Restock Date" Classes="filter">
+                        <Button.Flyout>
+                            <Flyout>
+                                <StackPanel>
+                                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,Auto">
+                                        <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">Before</TextBlock>
+                                        <DatePicker Grid.Row="0" Grid.Column="1" SelectedDate="{Binding DateBefore}"></DatePicker>
+                                        <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">After</TextBlock>
+                                        <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding DateAfter}"></DatePicker>
+                                    </Grid>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+
+                    <TextBlock  Text="{Binding FilterText}" TextWrapping="Wrap" FontSize="12" Margin="30,10,0,0" />
+                    <TextBlock  Text="{Binding PriceText}"  FontSize="12" Margin="30,10,0,0"></TextBlock>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <!-- Main Window -->
+        <Grid Grid.Column="1" RowDefinitions="*,10*">
+            <!-- Top Bar -->
+            <Border Grid.Row="0" Background="{DynamicResource 'Dark Charcoal'}">
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto">
+
+                    <Border Grid.Column="0" Padding="150,0,0,0">
+                        <TextBox Width="230" Height="44" FontSize="24" FontFamily="Inria Serif" Watermark="search"></TextBox>
+                    </Border>
+
+                    <Border Grid.Column="1" Classes="blue"></Border>
+                    <Button Grid.Column="2" Classes="blue">All Wallpapers</Button>
+                    <Button Grid.Column="3" Classes="blue">Add New Wallpaper</Button>
+                    <Button Grid.Column="4" Classes="blue">History</Button>
+
+                </Grid>
+            </Border>
+
+            <!-- Wallpapers -->
+            <Border Grid.Row="1" Background="White">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" IsDeferredScrollingEnabled="True">
+                    <ItemsControl ItemsSource="{Binding Photos}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Classes="Wallpaper" Margin="20">
+                                    <Border Width="300" Height="300" BorderBrush="#D9D9D9"
+                                            BoxShadow="0 5 10 0 DarkGray" BorderThickness="1">
+                                        <Canvas>
+                                            <Image Source="{Binding Path}" Height="290" Width="290" Stretch="UniformToFill" Canvas.Top="4" Canvas.Left="4"/>
+
+                                            <Border Canvas.Right="-6" Canvas.Bottom="-6" BoxShadow="0 5 10 0 DarkGray">
+                                                <TextBlock Text="{Binding Id}" Background="Black" Padding="5"
+                                                           FontWeight="Bold" FontSize="16"/>
+                                            </Border>
+                                        </Canvas>
+                                    </Border>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+    </Grid>
+
+
+</Window>
