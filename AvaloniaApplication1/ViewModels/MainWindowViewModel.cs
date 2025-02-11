@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Avalonia.Controls;
 using AvaloniaApplication1.Models;
+using AvaloniaApplication1.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using static AvaloniaApplication1.Services.FilterHelper;
-using static AvaloniaApplication1.Services.DbService;
+using static  AvaloniaApplication1.Services.DbService;
 
 
 namespace AvaloniaApplication1.ViewModels;
@@ -17,24 +19,7 @@ public partial class MainWindowViewModel : ObservableObject
         _dateBefore = DateTime.Today.ToString("dd/MM/yyyy");
     }
 
-    public ObservableCollection<Wallpapers> Photos { get; } = new()
-    {
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-        new ("ABCDEFGHIJKLMN", "12005-10", "/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Assets/640316-1275536973.jpg"),
-    };
-
     public LinkedList<string> SelectedFilters { get; } = new();
-
     [ObservableProperty]
     private string _low = "0";
     [ObservableProperty]
@@ -49,9 +34,37 @@ public partial class MainWindowViewModel : ObservableObject
     private string? _priceText;
 
 
+    private static Object _currentView = new WallpaperSearch();
+    public Object CurrentView
+    {
+        get => _currentView;
+        set => SetProperty(ref _currentView, value);
+    }
+    public void ChangeView()
+    {
+        AddWallpaperViewModel addWallpaperViewModel = new AddWallpaperViewModel();
+        CurrentView = addWallpaperViewModel;
+    }
 
+    public static void WindowSizeChanged(double width, double height)
+    {
+        if (_currentView is WallpaperSearch wallpaperSearch)
+        {
+                    wallpaperSearch.Width = width;
+        }
+    }
     partial void OnHighChanged(string value) => UpdatePriceText();
     partial void OnLowChanged(string value) => UpdatePriceText();
+
+
+    // private void UpdateTheWindowSize()
+    // {
+    //     if(CurrentView is WallpaperSearchViewModel)
+    //     {
+    //     }
+    //
+    // }
+
 
     [RelayCommand]
     private void UpdateFilterText(string filter)
@@ -72,6 +85,14 @@ public partial class MainWindowViewModel : ObservableObject
             }
         }
     }
+
+    [RelayCommand]
+    private void ChangeToAddWP()
+    {
+        CurrentView = new AddWallpaperViewModel();
+
+    }
+
 
     private void UpdatePriceText()
     {
@@ -96,7 +117,4 @@ public partial class MainWindowViewModel : ObservableObject
     {
         LoadPhotos(null, null, null, Low, High, null);
     }
-
-
-
 }

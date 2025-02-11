@@ -39,5 +39,11 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Styles/TextStyles.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Views/AddWallpaper.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/noklon/Projects/Csharp_Projects/AvaloniaApplication1/AvaloniaApplication1/Views/WallpaperSearch.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

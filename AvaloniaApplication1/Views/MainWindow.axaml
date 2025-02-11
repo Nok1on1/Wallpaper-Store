@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:b="https://github.com/wieslawsoltes/Avalonia.Xaml.Behaviors"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
         x:Class="AvaloniaApplication1.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Width="1920" Height="1080"
         MinWidth="1420" MinHeight="720"
+        SizeChanged="Control_OnSizeChanged"
         Title="AvaloniaApplication1">
 
     <Design.DataContext>
@@ -120,7 +121,7 @@
 
                     <Border Grid.Column="1" Classes="blue"></Border>
                     <Button Grid.Column="2" Classes="blue">All Wallpapers</Button>
-                    <Button Grid.Column="3" Classes="blue">Add New Wallpaper</Button>
+                    <Button Grid.Column="3" Classes="blue" Command="{Binding ChangeToAddWPCommand}" >Add New Wallpaper</Button>
                     <Button Grid.Column="4" Classes="blue">History</Button>
 
                 </Grid>
@@ -128,35 +129,10 @@
 
             <!-- Wallpapers -->
             <Border Grid.Row="1" Background="White">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" IsDeferredScrollingEnabled="True">
-                    <ItemsControl ItemsSource="{Binding Photos}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Button Classes="Wallpaper" Margin="20">
-                                    <Border Width="300" Height="300" BorderBrush="#D9D9D9"
-                                            BoxShadow="0 5 10 0 DarkGray" BorderThickness="1">
-                                        <Canvas>
-                                            <Image Source="{Binding Path}" Height="290" Width="290" Stretch="UniformToFill" Canvas.Top="4" Canvas.Left="4"/>
-
-                                            <Border Canvas.Right="-6" Canvas.Bottom="-6" BoxShadow="0 5 10 0 DarkGray">
-                                                <TextBlock Text="{Binding Id}" Background="Black" Padding="5"
-                                                           FontWeight="Bold" FontSize="16"/>
-                                            </Border>
-                                        </Canvas>
-                                    </Border>
-                                </Button>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </ScrollViewer>
+                <Viewbox Stretch="UniformToFill">
+                    <ContentControl Content="{Binding CurrentView}"/>
+                </Viewbox>
             </Border>
         </Grid>
     </Grid>
-
-
 </Window>
