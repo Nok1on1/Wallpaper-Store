@@ -33,6 +33,9 @@ public partial class MainWindowViewModel : ObservableObject
     [ObservableProperty]
     private string? _priceText;
 
+    private static double _windowWidth;
+    private static double _windowHeight;
+
 
     private static Object _currentView = new WallpaperSearch();
     public Object CurrentView
@@ -40,17 +43,27 @@ public partial class MainWindowViewModel : ObservableObject
         get => _currentView;
         set => SetProperty(ref _currentView, value);
     }
+    [RelayCommand]
     public void ChangeView()
     {
-        AddWallpaperViewModel addWallpaperViewModel = new AddWallpaperViewModel();
-        CurrentView = addWallpaperViewModel;
+        AddWallpaper addWallpaper = new AddWallpaper();
+        CurrentView = addWallpaper;
+        WindowSizeChanged(_windowWidth, _windowHeight);
     }
 
     public static void WindowSizeChanged(double width, double height)
     {
+        _windowWidth = width;
+        _windowHeight = height;
+
         if (_currentView is WallpaperSearch wallpaperSearch)
         {
                     wallpaperSearch.Width = width;
+        }
+        else if (_currentView is AddWallpaper addWallpaper)
+        {
+            addWallpaper.Width = width;
+            addWallpaper.Height = height;
         }
     }
     partial void OnHighChanged(string value) => UpdatePriceText();
@@ -84,13 +97,6 @@ public partial class MainWindowViewModel : ObservableObject
                 FilterText += " " + value;
             }
         }
-    }
-
-    [RelayCommand]
-    private void ChangeToAddWP()
-    {
-        CurrentView = new AddWallpaperViewModel();
-
     }
 
 

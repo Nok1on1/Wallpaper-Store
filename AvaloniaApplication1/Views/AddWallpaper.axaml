@@ -3,8 +3,67 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels1="clr-namespace:AvaloniaApplication1.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:local="clr-namespace:AvaloniaApplication1.Templates"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
              x:Class="AvaloniaApplication1.Views.AddWallpaper"
              x:DataType="viewModels1:AddWallpaperViewModel">
-    Welcome to Avalonia!
+
+        <StackPanel>
+            <!-- Photo -->
+            <Button HorizontalAlignment="Center" Classes="Insertion" Width="460" Height="350" Margin="30">
+                    <Image Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image.Source>
+                            <SvgImage Source="/Assets/photo-edit-svgrepo-com.svg"/>
+                        </Image.Source>
+                    </Image>
+            </Button>
+
+            <Border Background="Teal" CornerRadius="10" Width="700" Height="200" HorizontalAlignment="Center">
+                <Grid ColumnDefinitions="*,*">
+                    <Grid Grid.Column="0" Margin="10" RowDefinitions="*,*,*,*">
+                        <Grid  Grid.Row="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Company Name" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Grid.Column="1" VerticalAlignment="Center"></TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Production Date" VerticalAlignment="Center"></TextBlock>
+                                <local:CustomDatePicker Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Base Price" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Grid.Column="1" VerticalAlignment="Center"></TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="3" Grid.Column="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Quantity" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Grid.Column="1" VerticalAlignment="Center"></TextBox >
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="10" RowDefinitions="*,*,*,*">
+                        <Grid Grid.Row="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="ID_Num" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Grid.Column="1" VerticalAlignment="Center"></TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="1" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Restock Date" VerticalAlignment="Center"></TextBlock>
+                            <local:CustomDatePicker Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Width" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Grid.Column="1"  VerticalAlignment="Center"></TextBox>
+                        </Grid>
+                        <Grid Grid.Row="3" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="From" VerticalAlignment="Center"></TextBlock>
+                            <TextBox Grid.Column="1"  VerticalAlignment="Center"></TextBox>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+            </Border>
+
+        </StackPanel>
 </UserControl>

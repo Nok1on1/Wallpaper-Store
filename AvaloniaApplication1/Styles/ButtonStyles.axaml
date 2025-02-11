@@ -2,9 +2,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <StackPanel VerticalAlignment="Center">
-            <Button Classes="blue" Content="Hello"></Button>
-            <Button Classes="filter" Content="Hello"></Button>
-            <Button Classes="Wallpaper" Content="Wallpaper"></Button>
+            <Button Classes="blue" Content="Hello" HorizontalAlignment="Center"></Button>
+            <Button Classes="filter" Content="Hello" HorizontalAlignment="Center"></Button>
+            <Button Classes="Wallpaper" Content="Wallpaper" HorizontalAlignment="Center"></Button>
+            <Button Classes="Insertion"  Content="Hello" HorizontalAlignment="Center"></Button>
+            <Button Classes="Transparent"  Content="Hello" HorizontalAlignment="Center"></Button>
         </StackPanel>
     </Design.PreviewWith>
 
@@ -32,5 +34,21 @@
 
     <Style Selector="Button.Wallpaper">
         <Setter Property="Background" Value="Transparent"></Setter>
+    </Style>
+
+    <Style Selector="Button.Insertion">
+        <Setter Property="BorderBrush" Value="Gray"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="CornerRadius" Value="0"></Setter>
+    </Style>
+
+    <Style Selector="Button.Insertion:pointerover /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="Gray"></Setter>
+        <Setter Property="BorderBrush" Value="Gray"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+    </Style>
+
+    <Style Selector="Button.Transparent">
+        <Setter Property="BorderBrush" Value="Gray"></Setter>
     </Style>
 </Styles>
