@@ -1,0 +1,28 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="using:AvaloniaApplication1.Templates">
+    <Design.PreviewWith>
+        <StackPanel>
+            <local:ChoosePhoto />
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <Style Selector="local|ChoosePhoto">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="local:ChoosePhoto">
+                <Button Name="PART_Button"
+                        HorizontalAlignment="Center"
+                        Classes="Insertion"
+                        Width="400"
+                        Height="400"
+                        Margin="30">
+                    <Image Name="PART_Image"
+                           Width="400"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="{TemplateBinding ImageSource}" />
+                </Button>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

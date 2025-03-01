@@ -1,0 +1,54 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <StackPanel VerticalAlignment="Center">
+            <Button Classes="blue" Content="Hello" HorizontalAlignment="Center"></Button>
+            <Button Classes="filter" Content="Hello" HorizontalAlignment="Center"></Button>
+            <Button Classes="Wallpaper" Content="Wallpaper" HorizontalAlignment="Center"></Button>
+            <Button Classes="Insertion"  Content="Hello" HorizontalAlignment="Center"></Button>
+            <Button Classes="Transparent"  Content="Hello" HorizontalAlignment="Center"></Button>
+        </StackPanel>
+    </Design.PreviewWith>
+
+    <Style Selector="Button:pointerover /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="LightSeaGreen"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
+
+    <Style Selector="Button.blue">
+        <Setter Property="Background" Value="{DynamicResource 'Charcoal Blue'}"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+        <Setter Property="FontFamily" Value="Inria Sans Bold"></Setter>
+        <Setter Property="Padding" Value="30,10"></Setter>
+        <Setter Property="Margin" Value="30,0"></Setter>
+    </Style>
+
+    <Style Selector="Button.filter">
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="Margin" Value="40,10"></Setter>
+        <Setter Property="FontFamily" Value="Inria Sans Bold"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+    </Style>
+
+    <Style Selector="Button.Wallpaper">
+        <Setter Property="Background" Value="Transparent"></Setter>
+    </Style>
+
+    <Style Selector="Button.Insertion">
+        <Setter Property="BorderBrush" Value="Gray"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="CornerRadius" Value="0"></Setter>
+    </Style>
+
+    <Style Selector="Button.Insertion:pointerover /template/ ContentPresenter">
+        <Setter Property="Foreground" Value="Gray"></Setter>
+        <Setter Property="BorderBrush" Value="Gray"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
+    </Style>
+
+    <Style Selector="Button.Transparent">
+        <Setter Property="BorderBrush" Value="Gray"></Setter>
+    </Style>
+</Styles>

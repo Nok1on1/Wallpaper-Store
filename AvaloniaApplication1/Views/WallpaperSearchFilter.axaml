@@ -1,0 +1,87 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:AvaloniaApplication1.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaApplication1.Views.WallpaperSearchFilter"
+             x:DataType="viewModels:WallpaperSearchViewModel"
+             xmlns:local="clr-namespace:AvaloniaApplication1.Templates"
+             Width="1920">
+
+    <!-- Set the DataContext to an instance of WallpaperSearchViewModel -->
+    <UserControl.DataContext>
+        <viewModels:WallpaperSearchViewModel />
+    </UserControl.DataContext>
+
+    <StackPanel HorizontalAlignment="Center">
+        <!-- Price -->
+        <Button Content="Price" Classes="filter">
+            <Button.Flyout>
+                <Flyout>
+                    <StackPanel>
+                        <Grid RowDefinitions="*,*" ColumnDefinitions="*,Auto">
+                            <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">From</TextBlock>
+                            <TextBox
+                                Margin="5,0"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Text="{Binding Filters.PriceFrom, UpdateSourceTrigger=LostFocus}">
+                            </TextBox>
+                            <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">To</TextBlock>
+                            <TextBox
+                                Margin="5,0"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding Filters.PriceTo, UpdateSourceTrigger=LostFocus}">
+                            </TextBox>
+                        </Grid>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+        <!-- Width -->
+        <Button Content="Width" Classes="filter">
+            <Button.Flyout>
+                <Flyout>
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding Filters.WidthVariations}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Command="{Binding $parent[StackPanel].((viewModels:WallpaperSearchViewModel)DataContext).CheckedChangedCommand}"
+                                              CommandParameter="{Binding}"
+                                              Background="{DynamicResource 'Dark Charcoal'}"
+                                              Content="{Binding}">
+                                    </CheckBox>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+
+        <Button Content="Restock Date" Classes="filter">
+            <Button.Flyout>
+                <Flyout>
+                    <StackPanel>
+                        <Grid RowDefinitions="*,*" ColumnDefinitions="*,2*">
+                            <TextBlock VerticalAlignment="Center" Grid.Row="0" Grid.Column="0">From</TextBlock>
+                            <local:CustomDatePicker Date="{Binding Filters.DateFrom, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"
+                                                    Margin="10,0">
+                            </local:CustomDatePicker>
+                            <TextBlock VerticalAlignment="Center" Grid.Row="1" Grid.Column="0">To</TextBlock>
+                            <local:CustomDatePicker Date="{Binding Filters.DateTo, Mode=TwoWay}" Grid.Row="1" Grid.Column="1"
+                                                    Margin="10,0">
+                            </local:CustomDatePicker>
+                        </Grid>
+                    </StackPanel>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+
+        <Button HorizontalAlignment="Center" Margin="30" Command="{Binding SearchWallpapersCommand}" Classes="blue"
+                Content="Find">
+        </Button>
+    </StackPanel>
+</UserControl>

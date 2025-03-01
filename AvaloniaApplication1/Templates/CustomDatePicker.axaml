@@ -1,0 +1,27 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:AvaloniaApplication1.Templates">
+    <Design.PreviewWith>
+        <Border Margin="300">
+            <controls:CustomDatePicker />
+        </Border>
+    </Design.PreviewWith>
+
+    <Style Selector="controls|CustomDatePicker">
+        <!-- Set Defaults -->
+        <Setter Property="Template">
+            <ControlTemplate>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <Button Classes="Transparent" Foreground="White" Content="Choose Date" Name="PART_PopupButton"/>
+                    <Popup Name="PART_Popup"
+                           WindowManagerAddShadowHint="False"
+                           Placement="Bottom"
+                           PlacementTarget="{Binding ElementName=PART_PopupButton}">
+                        <DatePickerPresenter Date="{TemplateBinding Date}" Name="PART_DatePickerPresenter">
+                        </DatePickerPresenter>
+                    </Popup>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+</Styles>

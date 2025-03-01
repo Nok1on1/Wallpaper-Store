@@ -1,0 +1,85 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:AvaloniaApplication1.ViewModels"
+             xmlns:local="clr-namespace:AvaloniaApplication1.Templates"
+             mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+             x:Class="AvaloniaApplication1.Views.AddWallpaper"
+             x:DataType="viewModels:AddWallpaperViewModel">
+
+        <UserControl.Styles>
+            <Style Selector="TextBlock">
+                <Setter Property="FontSize" Value="30"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            </Style>
+            <Style Selector="TextBox">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="30"></Setter>
+            </Style>
+            <Style Selector="ComboBox">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            </Style>
+            <Style Selector="local|CustomDatePicker">
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="FontSize" Value="30"></Setter>
+            </Style>
+        </UserControl.Styles>
+        <StackPanel>
+            <!-- Photo -->
+            <local:ChoosePhoto Margin="50" ImageSource="{Binding Image, Mode=TwoWay}"></local:ChoosePhoto>
+
+            <Border Background="Teal" CornerRadius="10" Width="1000" Height="300" HorizontalAlignment="Center">
+                <Grid ColumnDefinitions="*,*">
+                    <Grid Grid.Column="0" Margin="10" RowDefinitions="*,*,*,*">
+                        <Grid  Grid.Row="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Company Name" ></TextBlock>
+                            <TextBox Text="{Binding Wallpaper.WCompany}" Grid.Column="1"  ></TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Production Date"  ></TextBlock>
+                            <local:CustomDatePicker Date="{Binding Wallpaper.WProdDate, Mode=TwoWay}"  Grid.Column="1"   HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2" Grid.Column="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Base Price"  ></TextBlock>
+                            <TextBox Text="{Binding Restock.BasePrice}" Grid.Column="1"  ></TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="3" Grid.Column="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Quantity"  ></TextBlock>
+                            <TextBox Text="{Binding Wallpaper.WQuantity}" Grid.Column="1"  ></TextBox >
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="10" RowDefinitions="*,*,*,*">
+                        <Grid Grid.Row="0" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="ID_Num"  ></TextBlock>
+                            <TextBox Text="{Binding Wallpaper.WId}" Grid.Column="1"  ></TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="1" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Restock Date" ></TextBlock>
+                            <local:CustomDatePicker Date="{Binding Restock.RestockDate}" Grid.Column="1"   HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="2" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Width"  ></TextBlock>
+                            <ComboBox Grid.Column="1"  
+                                      ItemsSource="{Binding Widths}"
+                                      SelectedItem="{Binding ChosenWidth}">
+                            </ComboBox>
+                        </Grid>
+                        <Grid Grid.Row="3" ColumnDefinitions="*,*">
+                            <TextBlock Grid.Column="0" Text="Reselling From"  ></TextBlock>
+                            <TextBox Text="{Binding Restock.SName}" Grid.Column="1"></TextBox>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Grid ColumnDefinitions="*,*">
+                <Button Command="{Binding AddButtonClickedCommand}" Classes="blue" Content="Add" HorizontalAlignment="Right" Margin="30" FontSize="40"></Button>
+                <Button Command="{Binding ClearButtonClickedCommand}" Classes="blue" Grid.Column="1" Content="Clear" HorizontalAlignment="Left"  FontSize="40" FontFamily=""></Button>
+            </Grid>
+        </StackPanel>
+</UserControl>
