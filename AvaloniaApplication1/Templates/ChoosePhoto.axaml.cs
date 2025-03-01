@@ -16,11 +16,6 @@ namespace AvaloniaApplication1.Templates;
 
 public class ChoosePhoto : TemplatedControl
 {
-    
-    // private readonly SvgImage _photoIcon = new()
-    // {
-    //     Source = new SvgSource(new Uri("avares://AvaloniaApplication1/Assets/photo-edit-svgrepo-com.svg"))
-    // };
 
     // private double _svgWidth = 40;
     private Image? _image;

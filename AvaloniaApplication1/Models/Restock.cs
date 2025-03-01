@@ -10,7 +10,7 @@ public class Restock
     public string SName { get; set; }
     public DateTimeOffset RestockDate { get; set; } = DateTimeOffset.UtcNow;
     public float? BasePrice { get; set; }
-    public int Quantity { get; set; }
+    public int? Quantity { get; set; }
 
     public Wallpapers Wallpapers { get; set; }
     public Seller Seller { get; set; }
